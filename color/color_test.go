@@ -5,6 +5,47 @@ import (
 	"testing"
 )
 
+func TestColor(t *testing.T) {
+	tests := []struct {
+		name   string
+		colors *Colors
+		want   string
+	}{
+		{
+			name:   "Foreground red",
+			colors: &Colors{Foreground: New(ColorRed)},
+			want:   "\x034",
+		},
+		{
+			name: "Foreground red, background black",
+			colors: &Colors{
+				Foreground: New(ColorRed),
+				Background: New(ColorBlack),
+			},
+			want: "\x034,1",
+		},
+		{
+			name:   "Background black (should not color)",
+			colors: &Colors{Background: New(ColorBlack)},
+			want:   "",
+		},
+		{
+			name:   "No colors (should not color)",
+			colors: &Colors{},
+			want:   "",
+		},
+	}
+
+	for _, tt := range tests {
+		got := Color("Hello, world", tt.colors)
+
+		if got != fmt.Sprintf("%sHello, world\x03", tt.want) {
+			t.Errorf("Color() got = %v, want %v", got, tt.want)
+			t.Fail()
+		}
+	}
+}
+
 func TestColors(t *testing.T) {
 	colorFunctions := map[rune]func(string) string{
 		0:  White,
