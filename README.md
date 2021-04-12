@@ -65,8 +65,8 @@ func main() {
 
 ```go
 import (
-    ircColor    "github.com/n7st/go-ircformat/emphasis"
-    ircEmphasis "github.com/n7st/go-ircformat/color"
+    ircColor    "github.com/n7st/go-ircformat/color"
+    ircEmphasis "github.com/n7st/go-ircformat/emphasis"
 )
 
 func main() {
