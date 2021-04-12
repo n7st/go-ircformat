@@ -1,3 +1,4 @@
+// Package emphasis applies emphasis (bold, italic etc) to text.
 package emphasis
 
 import "fmt"
